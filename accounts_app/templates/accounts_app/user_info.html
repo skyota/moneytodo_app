@@ -1,0 +1,18 @@
+{% extends 'accounts_app/base.html' %}
+
+{% block title %}ユーザ情報{% endblock %}
+
+{% block content %}
+
+<div class="user">
+  <div class="user__title section_title">
+    <h2>ユーザ情報</h2>
+  </div>
+  <div class="user__info">
+    <p>ユーザ名：{{ user.username }}</p>
+    <p>メールアドレス：{{ user.email|default:"メールアドレスが登録されていません。" }}</p>
+    <p>アカウント作成日：{{ user.date_joined }}</p>
+  </div>
+</div>
+
+{% endblock %}

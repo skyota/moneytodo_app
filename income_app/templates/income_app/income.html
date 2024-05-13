@@ -1,0 +1,38 @@
+{% extends 'accounts_app/base.html' %} {% block title %}収入一覧{% endblock %}
+{% load humanize %}
+{% block content %}
+<div class="income">
+  <div class="income__title section_title">
+    <h2>収入一覧</h2>
+  </div>
+  <table class="income__table table">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>日付</th>
+        <th>金額</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for income in incomes %}
+      <tr>
+        <td>{{ income.title }}</td>
+        <td>{{ income.date }}</td>
+        <td>{{ income.price|intcomma }}円</td>
+        <td>
+          <button class="blue_button" onclick="location.href='{% url 'update_income' income.id %}'">修正</button>
+        </td>
+        <td>
+          <button class="red_button" onclick="location.href='{% url 'delete_income' income.id %}'">削除</button>
+        </td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>計{{ total_price|intcomma }}円</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

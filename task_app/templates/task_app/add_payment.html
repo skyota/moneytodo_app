@@ -1,0 +1,38 @@
+{% extends 'accounts_app/base.html' %} {% block title %}支出入力{% endblock %}
+{% block content %}
+<div class="add_payment">
+  <div class="add_payment__title section_title">
+    <h2>支出入力</h2>
+  </div>
+  <form action="{% url 'add' %}" method="post" class="add_payment__form">
+    {% csrf_token %}
+    <p>
+      <label for="id_title">タイトル </label>
+      <input type="text" name="title" maxlength="100" placeholder="タイトル" required="" id="id_title">
+    </p>
+    <p>
+      <label for="id_date">日付 </label>
+      <input type="date" name="date" placeholder="日付" required="" id="id_date">
+    </p>
+    <p>
+      <input type="hidden" name="start_time" value="00:00" placeholder="開始時刻" id="id_start_time">
+    </p>
+    <p>
+      <input type="hidden" name="end_time" value="00:00" placeholder="終了時刻" id="id_end_time">
+    </p>
+    <p>
+      <label for="id_method">支払い方法 </label>
+      <select name="method" placeholder="支払い方法" required="" id="id_method">
+        <option value="" selected="">---------</option>
+        <option value="cash">現金</option>
+        <option value="credit">クレジットカード</option>
+      </select>
+    </p>
+    <p>
+      <label for="id_price">金額 </label>
+      <input type="number" name="price" placeholder="金額" required="" id="id_price">
+    </p>
+    <button class="btn btn-primary">追加</button>
+  </form>
+</div>
+{% endblock %}

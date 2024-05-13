@@ -1,0 +1,13 @@
+{% extends 'accounts_app/base.html' %} {% block title %}収入入力{% endblock %}
+{% block content %}
+<div class="add_income">
+  <div class="add_income__title section_title">
+    <h2>収入入力</h2>
+  </div>
+  <form action="{% url 'incomeadd' %}" method="post" class="add_income__form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">追加</button>
+  </form>
+</div>
+{% endblock %}

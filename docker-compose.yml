@@ -1,0 +1,42 @@
+# docker-compose.ymlのバージョンを指定
+version: '3'
+
+# 作成するコンテナ。dbとwebの２つを作成
+services:
+  # データベース
+  # db:
+  #   # 使用するイメージを指定
+  #   image: postgres
+  #   # 環境変数を設定。DBをpostgres、USER・PASSWORDは任意の値を設定
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=moneytodo
+  #     - POSTGRES_PASSWORD=stgnk
+  #   # ホストとコンテナのvolumeをバインドさせる
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #   ports:
+  #     - '5438:5432'
+  # Djangoアプリ
+  web:
+    # 指定したディレクトリ内のdockerfileからコンテナを作成する。ファイル名の指定がない場合はdockerfileを選択
+    build: .
+    # コンテナ内で実行するコマンド(manage.pyのrunserverを実行。8000のサーバーを起動)
+    command: python3 manage.py runserver 0.0.0.0:8000
+    # ホストのディレクトリをコンテナ内の指定したディレクトリと連動させる(ホスト:コンテナ。ホストのプロジェクトフォルダとコンテナ内の/codeを同期)
+    volumes:
+      # - .:/code
+      - .:/usr/src/app/
+    # ホスト側のポートを、コンテナ側の指定したポートに繋ぐ("ホスト:コンテナ"。localhost:8000にアクセスすると、コンテナ内の8000ポートに繋がる)
+    ports:
+      - "80:8000"
+    # データベースの依存関係を指定(webコンテナをdbコンテナと接続する)
+    # depends_on:
+    #   - db
+    # データベースなどの設定値は、.envファイル(環境変数)から取得する
+    env_file:
+      - .env
+
+# service外で、ホストとコンテナのvolumeをバインドさせる
+# volumes:
+#   postgres_data:

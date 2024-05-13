@@ -1,0 +1,16 @@
+{% extends 'accounts_app/base.html' %} {% block title %}収入情報の変更{% endblock %}
+{%block content %}
+<div class="update_income">
+  <div class="update_income__title section_title">
+    <h2>収入情報の変更</h2>
+  </div>
+  <div class="update_income__button">
+    <a href="{% url 'income' %}">収入一覧に戻る</a>
+  </div>
+  <form method="post" class="update_income__form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="更新" />
+  </form>
+</div>
+{% endblock %}

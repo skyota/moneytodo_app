@@ -1,0 +1,16 @@
+{% extends 'accounts_app/base_logout.html' %}
+
+{% block title %}ログアウト{% endblock %}
+
+{% block content %}
+
+<div class="logout">
+  <div class="logout__text">
+    <p>ログアウトしました</p>
+  </div>
+  <div class="logout__login">
+    <a href="{% url 'login' %}">ログイン</a>
+  </div>
+</div>
+
+{% endblock %}

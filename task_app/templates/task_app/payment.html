@@ -1,0 +1,49 @@
+{% extends 'accounts_app/base.html' %} {% block title %}支出一覧{% endblock %}
+{% load humanize %}
+{% block content %}
+<div class="payment">
+  <div class="payment__title section_title">
+    <h2>支出一覧</h2>
+  </div>
+  <table class="payment__table table">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>日付</th>
+        <th>支払い方法</th>
+        <th>金額</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in payments %}
+      {% if payment.price != 0 %}
+      <tr>
+        <td>{{ payment.title }}</td>
+        <td>{{ payment.date }}</td>
+        <td>
+          {% if payment.method == 'cash' %}
+          現金
+          {% else %}
+          クレジットカード
+          {% endif %}
+        </td>
+        <td>{{ payment.price|intcomma }}円</td>
+        <td>
+          <button class="blue_button" onclick="location.href='{% url 'update_payment' payment.id %}'">修正</button>
+        </td>
+        <td>
+          <button class="red_button" onclick="location.href='{% url 'delete_payment' payment.id %}'">削除</button>
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>計{{ total_price|intcomma }}円</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

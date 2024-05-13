@@ -1,0 +1,16 @@
+{% extends 'accounts_app/base.html' %} {% block title %}支出情報の変更{% endblock %}
+{%block content %}
+<div class="update_payment">
+  <div class="update_payment__title section_title">
+    <h2>支出情報の変更</h2>
+  </div>
+  <div class="update_payment__button">
+    <a href="{% url 'payment' %}">支出一覧に戻る</a>
+  </div>
+  <form method="post" class="update_payment__form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="更新" />
+  </form>
+</div>
+{% endblock %}

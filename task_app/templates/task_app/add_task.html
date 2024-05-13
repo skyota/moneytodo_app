@@ -1,0 +1,13 @@
+{% extends 'accounts_app/base.html' %} {% block title %}タスク入力{% endblock %}
+{% block content %}
+<div class="add_task">
+  <div class="add_task__title section_title">
+    <h2>タスク入力</h2>
+  </div>
+  <form action="{% url 'add' %}" method="post" class="add_task__form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">追加</button>
+  </form>
+</div>
+{% endblock %}

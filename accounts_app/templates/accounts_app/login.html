@@ -1,0 +1,23 @@
+{% extends 'accounts_app/base_logout.html' %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+
+<div class="login">
+    <div class="login__title section_title">
+        <h2>ログイン</h2>
+    </div>
+    <div class="login__form">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="login__button" value="ログイン">
+        </form>
+    </div>
+    <div class="login__signup">
+        <a href="{% url 'signup' %}">ユーザー登録</a>
+    </div>
+</div>
+
+{% endblock %}
