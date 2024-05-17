@@ -5,23 +5,27 @@ FROM python:3
 ENV PYTHONUNBUFFERED 1
 
 # appユーザのDjangoディレクトリを作成
-ENV APP_HOME = /usr/src/app
+# ENV APP_HOME = /usr/src/app
 
 # コンテナで/codeディレクトリ作成
 # RUN mkdir /code
-RUN mkdir $APP_HOME
+# RUN mkdir $APP_HOME
+RUN mkdir /usr/src/app
 
 # ワークディレクトリを設定する(/codeで作業)
 # WORKDIR /code
-WORKDIR $APP_HOME
+# WORKDIR $APP_HOME
+WORKDIR /usr/src/app
 
 # codeディレクトリにrequirements.txtを追加する
 # ADD requirements.txt /code/
-ADD requirements.txt $APP_HOME
+# ADD requirements.txt $APP_HOME
+ADD requirements.txt /usr/src/app/
 
 # requirements.txtに記載しているものをinstallする
 RUN pip install -r requirements.txt
 
 # プロジェクトを追加する
 # ADD . /code/
-ADD . $APP_HOME
+# ADD . $APP_HOME
+ADD . /usr/src/app/
